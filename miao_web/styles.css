@@ -1,0 +1,390 @@
+/* 重置和基础样式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* 正文使用无衬线字体 */
+  line-height: 1.6;
+  color: #333;
+  background-color: #FFFFFF; /* 白色背景 */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif; /* 标题使用独特的衬线字体 */
+  color: #00838F; /* 马尔代夫蓝有点绿 */
+}
+
+/* 容器和网格系统 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col {
+  padding: 0 15px;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* 12列网格系统 */
+@media (min-width: 768px) {
+  .col-md-1 { flex: 0 0 8.333333%; max-width: 8.333333%; }
+  .col-md-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
+  .col-md-3 { flex: 0 0 25%; max-width: 25%; }
+  .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+  .col-md-5 { flex: 0 0 41.666667%; max-width: 41.666667%; }
+  .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+  .col-md-7 { flex: 0 0 58.333333%; max-width: 58.333333%; }
+  .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+  .col-md-9 { flex: 0 0 75%; max-width: 75%; }
+  .col-md-10 { flex: 0 0 83.333333%; max-width: 83.333333%; }
+  .col-md-11 { flex: 0 0 91.666667%; max-width: 91.666667%; }
+  .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* 导航栏 */
+.navbar {
+  background: linear-gradient(to right, #00838F, #006064); /* 添加渐变色 */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 0; /* 增加一些垂直内边距 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: flex-end; /* 将内容靠右对齐 */
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px; /* 稍微减小字体大小 */
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  padding: 5px 15px; /* 添加一些内边距 */
+  background-color: rgba(255, 255, 255, 0.1); /* 添加轻微的背景色 */
+  border-radius: 5px; /* 添加圆角 */
+  transition: background-color 0.3s ease; /* 添加过渡效果 */
+}
+
+.logo:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* 鼠标悬停时背景色变化 */
+}
+
+/* 移除之前关于 logo img 的样式 */
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .navbar .container {
+    justify-content: center; /* 在小屏幕上居中对齐 */
+  }
+  
+  .logo {
+    font-size: 20px; /* 在小屏幕上进一步减小字体大小 */
+  }
+}
+
+/* 图片轮播优化 */
+.carousel {
+  width: 100%;
+  height: 400px; /* 固定高度为400px */
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px; /* 为固定导航栏留出空间 */
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-item.active {
+  opacity: 1;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保持图片比例并填充整个容器 */
+  object-position: center; /* 居中显示图片 */
+}
+
+/* 添加虚化背景 */
+.carousel-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(10px);
+  transform: scale(1.1); /* 稍微放大以覆盖边缘 */
+  z-index: -1;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(0, 131, 143, 0.5); /* 半透明的马尔代夫蓝有点绿 */
+  margin: 0 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-indicator.active {
+  background-color: #00838F; /* 马尔代夫蓝有点绿 */
+  transform: scale(1.2);
+}
+
+/* 移除轮播覆盖层 */
+.carousel::after {
+  display: none;
+}
+
+/* 移除轮播标题相关的CSS */
+.carousel-title {
+  display: none; /* 或者直接删除这个选择器及其所有属性 */
+}
+
+/* 自我介绍部分 */
+.about-me {
+  background-color: #F5F5F5; /* 浅灰色背景 */
+  width: 80%; /* 设置宽度为80% */
+  margin: 40px auto 0; /* 上边距40px，左右自动居中 */
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.about-me h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.about-me h2 i {
+  margin-right: 10px;
+  font-size: 32px;
+}
+
+.about-me p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .about-me {
+    width: 90%; /* 在小屏幕上增加宽度 */
+    padding: 20px;
+  }
+}
+
+/* 社交媒体链接 */
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icon {
+  font-size: 40px; /* 设置图标大小为40px */
+  margin: 0 15px; /* 保持15px的间距 */
+  color: #00838F; /* 马尔代夫蓝有点绿 */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1); /* 鼠标悬停时稍微放大图标 */
+  color: #0056b3; /* 悬停时颜色变深 */
+}
+
+/* 移除之前为每个社交媒体图标单独设置的颜色 */
+.social-icon.wechat,
+.social-icon.weibo,
+.social-icon.instagram {
+  color: #00838F; /* 统一使用相同的蓝色 */
+}
+
+/* 底部信息 */
+footer {
+  background-color: white;
+  color: #00838F; /* 马尔代夫蓝有点绿 */
+  padding: 15px 0;
+  margin-top: 40px;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-text {
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.contact-info {
+  font-size: 14px;
+}
+
+/* 添加个性化标题字体 */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+/* 其他 CSS 代码保持不变 */
+
+/* 删除重复的 h1, h2, h3, h4, h5, h6 样式定义 */
+
+/* 其他 CSS 代码保持不变 */
+
+/* 优化作品展示部分 */
+.works {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.work-item {
+  flex: 0 1 300px; /* 固定宽度,但允许缩小 */
+  text-align: center;
+  background-color: #FFFFFF; /* 白色背景 */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  padding: 20px;
+}
+
+.work-item:hover {
+  transform: translateY(-5px);
+}
+
+.work-item i {
+  font-size: 48px;
+  color: #00838F;
+  margin-bottom: 15px;
+}
+
+.work-item h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.work-item p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .works {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .work-item {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+}
+
+/* 调整主内容区域的位置 */
+main {
+  padding-top: 20px; /* 减少顶部内边距 */
+}
+
+/* 图片延迟加载样式 */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}
+
+.work-item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.work-item-link:hover {
+  text-decoration: none;
+}
+
+/* 平板电脑适配 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .carousel {
+    height: 350px;
+  }
+
+  .works {
+    justify-content: space-around;
+  }
+
+  .work-item {
+    flex: 0 1 45%;
+    margin-bottom: 20px;
+  }
+
+  .about-me {
+    width: 85%;
+  }
+}
+
+/* 确保在大屏幕上的布局 */
+@media (min-width: 1025px) {
+  .works {
+    justify-content: center;
+  }
+
+  .work-item {
+    flex: 0 1 300px;
+  }
+}
